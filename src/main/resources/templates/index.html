@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th=http://www.thymeLeaf.org xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <script type="text/javascript" src="/webjars/jquery/3.1.0/jquery.min.js/"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.js"></script>
-    <link rel="stylesheet"
-    href="webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="/webjars/jquery/2.2.3/jquery.min.js/"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.js"></script>
+        <script type="text/javascript" src="../static/main.js"></script>
+        <link rel="stylesheet"
+        href="webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
 
-</head>
-<body>
-    <div class="container">
+    </head>
+    <body>
+        <div class="container">
         <div class="card">
             <div class="card-block" >
                 <table class="table table-hover">
                     <tr>
-                        <th> ID </th>
                         <th> TWIT </th>
                     </tr>
                     <tr th:each=" twitt : ${data}" >
-                        <td th:text="${twitt.id}"></td>
                         <td th:text="${twitt.twitt}"></td>
+                        <td> <a th:href="@{findOne/(id=${twitt.id})}" class="btn btn-primary eBtn">Edit </a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-</body>
+    </body>
+    <div class="myform">
+        <form th : action="@{/save}" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newtweet">New tweet</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="tweet-name" class="col-form-label">Tweet:</label>
+                                <input type="text" class="form-control" id="tweet-name" name="tweetname" value="">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Send message</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
 </html>
