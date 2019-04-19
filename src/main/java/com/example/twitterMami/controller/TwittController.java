@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Optional;
 
 @Controller
 public class TwittController {
@@ -19,9 +24,22 @@ public class TwittController {
         return "index";
     }
 
-    @GetMapping("/add")
-    public String addTwitt(TwitEntity twitEntity){
+    @PostMapping("/save")
+    public String save(TwitEntity twitEntity){
         twitRepository.save(twitEntity);
         return "redirect:/";
+    }
+
+    @PutMapping("/delete")
+    public String deleteTwitt(Integer id){
+        twitRepository.deleteById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/findById")
+    @ResponseBody
+    public Optional<TwitEntity> findOne(Integer id){
+        return twitRepository.findById(id);
+
     }
 }
